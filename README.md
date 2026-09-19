@@ -16,4 +16,4 @@ Features:
 
 Tech: single self-contained HTML file, vanilla JavaScript and WebGL for the raymarched renderer, no dependencies beyond Google Fonts. A discrete or reasonably capable integrated GPU is recommended, since raymarching is the most compute-intensive part.
 
-Usage: open `EventHorizon.html` in a modern browser. Place black holes, set masses, and run the simulation to watch inspiral and merger unfold.
+Usage: open `EventHorizon.html` in a modern browser or my personal website, sid2010abc.github.io. Place black holes, set masses, and run the simulation to watch inspiral and merger unfold.
