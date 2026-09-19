@@ -1,18 +1,19 @@
-# Circuit Lab
+# Event Horizon Lab
 
-Circuit Lab is an interactive simulator for series, parallel, and mixed resistive circuits, built to make the distinction between these two wiring topologies concrete rather than purely formulaic.
+Event Horizon Lab is a real-time simulator of multi-black-hole dynamics, layering Newtonian gravity, gravitational-wave-driven orbital decay, and a raymarched renderer for gravitational lensing into a single interactive sandbox.
 
-The simulator is not animation dressed up as physics. Every frame, it solves the actual circuit using Ohm's law (V = IR) and the standard series/parallel resistance combination rules, Req = R1 + R2 + ... for series and 1/Req = 1/R1 + 1/R2 + ... for parallel, then derives current, voltage drop, and dissipated power (P = I squared times R) for every component from that solution. Bulb brightness is rendered proportionally to actual power output, not a fixed animation keyed to a slider position.
+The base layer is an N-body gravitational integrator: every body exerts a Newtonian gravitational force on every other body, and their trajectories are updated each timestep accordingly. This is the same underlying physics that governs planetary motion, just applied to compact, extremely massive objects at much smaller separations. As two black holes spiral toward each other, the simulation adds a gravitational-wave inspiral term, modeling the energy loss that causes orbiting compact objects to lose orbital energy and spiral inward over time. This is the actual physical mechanism behind the binary black hole mergers detected by observatories like LIGO.
 
-The most instructive interaction is deliberately destructive: click any bulb to simulate a burned-out filament, modeled as that component's resistance going to infinity (an open circuit). In series, this drops current to zero everywhere, since there is exactly one conduction path. In parallel, the remaining branches are electrically independent and are unaffected, since each one has its own return path to the source. Seeing that asymmetry play out live is the core teaching moment of the lab.
+When two bodies merge, the simulation does not simply combine their masses. It applies fitting formulas derived from numerical relativity simulations to estimate the final black hole's mass, spin, and recoil ("kick") velocity from asymmetric gravitational wave emission during merger. These fits are a standard technique in computational astrophysics, since directly solving the Einstein field equations for every merger event is computationally intractable in a real-time context.
+
+Gravitational lensing is rendered using raymarching: rays are traced through curved space around each black hole so that background distortion and light bending are computed geometrically rather than faked with a shader trick.
 
 Features:
-- Series, parallel, and mixed topology modes
-- Live circuit solving on every parameter change, no precomputed states
-- Per component readouts for voltage, current, and power
-- Interactive fault injection (burn out any bulb) with physically correct propagation of the failure
-- Live equivalent resistance panel showing the formula solved with your actual numbers
+- N-body Newtonian gravity integrator supporting multiple simultaneous black holes
+- Gravitational-wave-driven orbital decay (inspiral)
+- Numerical-relativity-fitted merger remnants (final mass, spin, and kick velocity)
+- Raymarched real-time rendering of gravitational lensing
 
-Tech: single self-contained HTML file, vanilla JavaScript, no build step, no dependencies beyond Google Fonts. Runs entirely client-side.
+Tech: single self-contained HTML file, vanilla JavaScript and WebGL for the raymarched renderer, no dependencies beyond Google Fonts. A discrete or reasonably capable integrated GPU is recommended, since raymarching is the most compute-intensive part.
 
-Usage: open `CircuitLab.html` in a browser. Choose a topology, adjust battery voltage and resistances, and try burning out a bulb in each mode to compare failure behavior.
+Usage: open `EventHorizon.html` in a modern browser. Place black holes, set masses, and run the simulation to watch inspiral and merger unfold.
